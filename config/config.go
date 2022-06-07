@@ -12,22 +12,25 @@ import (
 
 // Setup : initializing mysql database
 func Init() *gorm.DB {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	_ = godotenv.Load()
+	// if err != nil {
+	// 	log.Fatal("Error loading .env file")
+	// }
 
 	host := os.Getenv("host")
 	port := os.Getenv("port")
 	user := os.Getenv("user")
 	dbname := os.Getenv("dbname")
 	password := os.Getenv("password")
-	print(fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s", host, port, user, dbname, password))
-	db, err := gorm.Open("postgres", fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s", host, port, user, dbname, password))
+	db, err := gorm.Open("postgres", fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable", host, port, user, dbname, password))
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	// err = db.DB().Ping()
+	// if err != nil {
+
+	// }
 	return db
 }

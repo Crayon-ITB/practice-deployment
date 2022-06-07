@@ -20,5 +20,5 @@ func main() {
 
 	defer db.Close()
 	r := routes.SetupRoutes(*employeeHdl)
-	r.Run(":8081")
+	r.Run(":8080")
 }
